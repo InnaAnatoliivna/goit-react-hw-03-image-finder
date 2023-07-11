@@ -1,16 +1,12 @@
-export const App = () => {
-  return (
-    <div
-      style={{
-        height: '100vh',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        fontSize: 40,
-        color: '#010101'
-      }}
-    >
-      React homework template
-    </div>
-  );
+// import { fetchImages } from 'components/service-api/pixabay-api';
+
+export class App {
+
+  render() {
+    return (
+      <div>
+        <p>todo</p>
+      </div>
+    );
+  }
 };

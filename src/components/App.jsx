@@ -1,6 +1,7 @@
+import { Component } from 'react';
 // import { fetchImages } from 'components/service-api/pixabay-api';
 
-export class App {
+export class App extends Component {
 
   render() {
     return (

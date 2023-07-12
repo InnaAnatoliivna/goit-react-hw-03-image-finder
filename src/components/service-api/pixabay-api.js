@@ -6,3 +6,10 @@ export const fetchImages = async (name) => {
     }
     return await Promise.reject(`No image found with the name ${name}`);
 }
+
+// eslint-disable-next-line import/no-anonymous-default-export
+export default { fetchImages };
+
+// id - унікальний ідентифікатор
+// webformatURL - посилання на маленьке зображення для списку карток
+// largeImageURL - посилання на велике зображення для модального вікна

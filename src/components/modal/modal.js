@@ -1,4 +1,3 @@
-// import { Component } from "react";
 import { createPortal } from "react-dom";
 
 const Modal = ({ children, onBackdropClose }) => {
@@ -12,7 +11,10 @@ const Modal = ({ children, onBackdropClose }) => {
         >
             <div
                 id="modal-window"
-                className="Modal">{children}</div>
+                className="Modal"
+            >
+                {children}
+            </div>
         </div>, modalRoot
     )
 }

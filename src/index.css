@@ -45,6 +45,7 @@ img {
   left: 0;
   position: sticky;
   z-index: 1100;
+  margin-bottom: 30px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -218,9 +219,9 @@ img {
 /* loader */
 
 .loader {
-  position: absolute;
+  position: fixed;
   z-index: 5;
-  top: 40%;
+  top: 10%;
   left: 50%;
   transform: translate(-50%);
 }
@@ -228,4 +229,11 @@ img {
 .empty {
   margin-top: 45px;
   text-align: center;
+}
+
+/* scroll up  */
+.scroll-wrapp {
+  position: fixed;
+  bottom: 80%;
+  right: 80%;
 }

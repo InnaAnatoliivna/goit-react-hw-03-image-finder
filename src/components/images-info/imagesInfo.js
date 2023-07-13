@@ -3,10 +3,7 @@ import { Component } from 'react';
 import ImageGallery from 'components/imageGallery/imageGallery';
 import Loader from 'components/loader/loader';
 import Button from 'components/button/button';
-import smoothScroll from 'components/smooth-scroll/smooth-scroll';
 import ModalContainer from 'components/modal-container/modalContainer';
-// import Modal from 'components/modal/modal';
-// import ImageGalleryItem from 'components/imageGalleryItem/imageGalleryItem';
 
 export default class ImagesInfo extends Component {
     state = {
@@ -15,12 +12,18 @@ export default class ImagesInfo extends Component {
         status: false,
         page: 1,
         isLoadMore: false,
-        // isModal: false
     }//here we got 'searchQuery' as props from App
 
     onLoadMore = () => {
-        this.setState(prevState => ({ page: prevState.page + 1 })
-        )
+        if (this.state.results) {
+            this.setState(prevState => ({
+                results: [...prevState.results, ...this.state.results],
+                page: prevState.page + 1, //+
+                isLoadMore: true
+            }));
+        } else {
+            this.setState({ isLoadMore: false });
+        }
     }
 
     async componentDidUpdate(prevProps, prevState) {
@@ -43,7 +46,6 @@ export default class ImagesInfo extends Component {
                 } else if (prevQuery !== nextQuery) {
                     this.setState({ isLoadMore: true })
                 }
-                smoothScroll();
             } catch (error) {
                 this.setState({ error });
             } finally {
@@ -52,22 +54,12 @@ export default class ImagesInfo extends Component {
         }
     }
 
-    // isModal = (showModal) => {
-    //     this.setState({ isModal: showModal })
-
-    // }
-
     render() {
-        const { results, status, isLoadMore, isModal } = this.state;
+        const { results, status, isLoadMore, openModal } = this.state;
         return (
             <div className='images-info'>
                 {this.props.searchQuery === '' && <h2 className='empty'>Please enter a query to search for images!</h2>}
-                {/* {results && (
-                    <>
-                        <ImageGallery arrayResults={results} />
-                        <ModalContainer showModal={this.isModal} results={results} />
-                    </>)} */}
-                {results && <ImageGallery arrayResults={results} />}
+                {results && <ImageGallery arrayResults={results} onOpenModal={openModal} />}
                 {/* {isModal && <ModalContainer showModal={this.isModal} results={results} />} */}
                 <ModalContainer showModal={this.isModal} results={results} />
                 {status && <Loader />}
@@ -75,7 +67,6 @@ export default class ImagesInfo extends Component {
                     <Button handleClick={this.onLoadMore}>
                         <span>Load More</span>
                     </Button>}
-                {/* <Modal onClose={this.toogleModal}><ImageGalleryItem /></Modal> */}
             </div>
         );
     }

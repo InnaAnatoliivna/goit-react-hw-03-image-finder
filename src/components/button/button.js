@@ -1,6 +1,12 @@
-const Button = (children) => {
+const Button = ({ children, handleClick }) => {
     return (
-        <button type="button" className="Button">{children}</button>
+        <div className="btn-wrapper">
+            <button
+                type="button"
+                className="Button"
+                onClick={handleClick}
+            >{children}</button>
+        </div>
     )
 }
 

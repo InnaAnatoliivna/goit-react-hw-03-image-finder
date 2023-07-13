@@ -1,6 +1,6 @@
 import ImageGalleryItem from 'components/imageGalleryItem/imageGalleryItem';
 
-const ImageGallery = ({ arrayResults }) => {
+const ImageGallery = ({ arrayResults, onOpenModal }) => {
     return (
         <ul className="ImageGallery">
             {arrayResults.map(image => {
@@ -9,7 +9,7 @@ const ImageGallery = ({ arrayResults }) => {
                         key={image.id}
                         imageId={image.id}
                         imageLarge={image.largeImageURL}
-                        imadeWeb={image.webformatURL}
+                        imageWeb={image.webformatURL}
                     />
                 )
             })}

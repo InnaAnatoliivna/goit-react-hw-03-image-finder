@@ -18,9 +18,7 @@ export class App extends Component {
     return (
       <div className='App'>
         <ToastContainer autoClose={4000} pauseOnHover theme="colored" />
-        <Searchbar
-          onSubmit={this.onFormSubmit}
-        />
+        <Searchbar onSubmit={this.onFormSubmit} />
         <ImagesInfo searchQuery={searchQueryDuplicate} />
       </div>
     );

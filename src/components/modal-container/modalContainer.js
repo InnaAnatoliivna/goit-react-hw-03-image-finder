@@ -1,24 +1,30 @@
 import { Component } from 'react';
 import Modal from 'components/modal/modal';
-import ImageGalleryItem from 'components/imageGalleryItem/imageGalleryItem';
 
 class ModalContainer extends Component {
     state = {
-        showModal: false,
+        showModal: true,
         selectedImage: null
     }
-    // modal close==============================================>>
+
+    //handler on the card with the image is hang in the 'imageGalleryItem.js'
+
     componentDidMount() {
-        console.log('modal did mount');
         window.addEventListener('keydown', this.handleKeydown);
     }
+    componentDidUpdate(prevProps, prevState) {
+        if (prevProps.selectedImage !== this.props.selectedImage) {
+            this.setState({
+                selectedImage: this.props.selectedImage,
+            });
+            this.toggleModal()
+        }
+    }
     componentWillUnmount() {
-        console.log('modal will unmount');
         window.removeEventListener('keydown', this.handleKeydown);
     }
     handleKeydown = (e) => {
         if (e.code === 'Escape') {
-            console.log('close modal on Escape');
             this.toggleModal();
         }
     }
@@ -27,17 +33,9 @@ class ModalContainer extends Component {
             this.toggleModal()
         }
     }
-    //<<===========================================================
-    toggleModal = () => {
-        this.setState(prevState => ({ showModal: !prevState.showModal }))
-    }
 
-    onOpenModal = getImageId => {
-        const { results } = this.props;
-        console.log('hello in ON OPEN MODAL');
-        const selectedImage = results.find((image) => image.id === getImageId);
-        this.setState({ selectedImage, showModal: true });
-        console.log(selectedImage);
+    toggleModal = () => {
+        this.setState({ showModal: !this.state.showModal })
     }
 
     render() {
@@ -47,16 +45,24 @@ class ModalContainer extends Component {
                 {selectedImage && showModal &&
                     <Modal
                         onBackdropClose={this.handleBackdropClick}>
-                        <ImageGalleryItem
-                            imageId={selectedImage.id}
-                            // imageLarge={selectedImage.largeImageURL}
-                            imageWeb={selectedImage.largeImageURL}
-                            onOpenModal={this.onOpenModal}
-                        />
+                        <div>
+                            <img src={selectedImage.largeImageURL} alt="imageSearch" />
+                        </div>
                     </Modal>}
             </>
         )
     }
 }
-
 export default ModalContainer;
+
+
+
+
+    // onOpenModal = () => {
+    //     // const { results } = this.props;
+    //     //     const selectedImage = results.find((image) => image.id === getImageId);
+    //     this.setState({
+    //         selectedImage: this.props.selectedImage,
+    //         showModal: true
+    //     });
+    // }

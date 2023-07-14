@@ -1,15 +1,15 @@
+// import { nanoid } from 'nanoid';
+// const KEYitem = nanoid()
+
 const ImageGalleryItem = ({
+    arrayResults,
     imageWeb,
-    // imageLarge,
     imageId,
-    onOpenModal }) => {
+    getSelectImg }) => {
 
-    const handleClick = (event) => {
-        // event.preventDefault();
-
-        const getImageId = imageId;
-        console.log(getImageId);
-        onOpenModal(getImageId);
+    const handleClick = (e) => {
+        const selectedImage = arrayResults.find((image) => { return image.id === imageId });
+        getSelectImg(selectedImage); //this function is in 'imageInfo.js'
     }
 
     return (

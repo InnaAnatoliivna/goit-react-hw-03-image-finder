@@ -39,8 +39,8 @@ export default class ImagesInfo extends Component {
                     showLoadMore: data.totalHits > 12 * currentPage,
                     page: currentPage
                 });
-                !data.totalHits && toast.warning("No results found. Please try again!")
-                nextPage >= totalPage && toast.error("We're sorry, but you've reached the end of search results!");
+                !data.totalHits && toast.error("No results found. Please try again!")
+                nextPage >= totalPage && toast.warning("We're sorry, but you've reached the end of search results!");
             } catch (error) {
                 this.setState({ error });
             } finally {

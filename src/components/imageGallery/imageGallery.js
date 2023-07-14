@@ -1,27 +1,7 @@
-// import ImageGalleryItem from 'components/imageGalleryItem/imageGalleryItem';
-
-// const ImageGallery = ({ arrayResults }) => {
-//     return (
-//         <ul className="ImageGallery">
-//             {arrayResults.map(image => {
-//                 return (
-//                     <ImageGalleryItem
-//                         key={image.id}
-//                         imageId={image.id}
-//                         imageLarge={image.largeImageURL}
-//                         imageWeb={image.webformatURL}
-//                     />
-//                 )
-//             })}
-//         </ul>
-//     )
-// }
-
-// export default ImageGallery;
-
 import ImageGalleryItem from 'components/imageGalleryItem/imageGalleryItem';
 
-const ImageGallery = ({ arrayResults }) => {
+
+const ImageGallery = ({ arrayResults, getSelectImg }) => {
 
     return (
         <ul className="ImageGallery">
@@ -30,9 +10,9 @@ const ImageGallery = ({ arrayResults }) => {
                     <ImageGalleryItem
                         key={image.id}
                         imageId={image.id}
-                        imageLarge={image.largeImageURL}
                         imageWeb={image.webformatURL}
-                    // onOpenModal={onOpenModal}
+                        arrayResults={arrayResults}
+                        getSelectImg={getSelectImg}
                     />
                 )
             })}

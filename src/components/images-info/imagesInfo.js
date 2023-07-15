@@ -17,9 +17,6 @@ export default class ImagesInfo extends Component {
         selectedImage: null
     }//here we got 'searchQuery' as props from App
 
-    componentDidMount() {
-        window.addEventListener('keydown', this.handleKeydown);
-    }
     async componentDidUpdate(prevProps, prevState) {
         const prevQuery = prevProps.searchQuery;
         const nextQuery = this.props.searchQuery;
@@ -47,9 +44,6 @@ export default class ImagesInfo extends Component {
                 this.setState({ showLoader: false })
             }
         }
-    }
-    componentWillUnmount() {
-        window.removeEventListener('keydown', this.handleKeydown);
     }
     handleKeydown = (e) => {
         if (e.code === 'Escape') {
@@ -80,7 +74,7 @@ export default class ImagesInfo extends Component {
             <div>
                 {this.props.searchQuery === '' && <h2 className='empty'>Please enter a query to search for images!</h2>}
                 {results && <ImageGallery arrayResults={results} key={results.id} onOpenModal={this.onOpenModal} />}
-                {showModal && <Modal onBackdropClose={this.handleBackdropClick}>
+                {showModal && <Modal onBackdropClose={this.handleBackdropClick} onKeydownClose={this.handleKeydown}>
                     <img src={selectedImage.largeImageURL} alt="imageSearch" /></Modal>}
                 {showLoader && <Loader />}
                 {showLoadMore && <Button handleClick={this.onLoadMore}>

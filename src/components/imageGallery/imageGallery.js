@@ -1,9 +1,9 @@
+import PropTypes from 'prop-types';
 import ImageGalleryItem from 'components/imageGalleryItem/imageGalleryItem';
 
-const ImageGallery = ({ arrayResults, onOpenModal, getFilmId }) => {
-
+const ImageGallery = ({ arrayResults, onOpenModal, ref }) => {
     return (
-        <ul className="ImageGallery">
+        <ul className="ImageGallery" id='gallery'>
             {arrayResults.map(image => {
                 return (
                     <ImageGalleryItem
@@ -11,7 +11,6 @@ const ImageGallery = ({ arrayResults, onOpenModal, getFilmId }) => {
                         imageId={image.id}
                         imageWeb={image.webformatURL}
                         onOpenModal={onOpenModal}
-                        getFilmId={getFilmId}
                     />
                 )
             })}
@@ -20,3 +19,9 @@ const ImageGallery = ({ arrayResults, onOpenModal, getFilmId }) => {
 }
 
 export default ImageGallery;
+
+ImageGallery.propTypes = {
+    arrayResults: PropTypes.array,
+    onOpenModal: PropTypes.func,
+    key: PropTypes.number,
+}

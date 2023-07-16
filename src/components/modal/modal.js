@@ -1,6 +1,6 @@
 import { Component } from "react";
 import { createPortal } from "react-dom";
-
+import PropTypes from 'prop-types';
 class Modal extends Component {
     modalRoot = document.querySelector('#root-modal');
     // { children, onBackdropClose, onKeydownClose } -->>>>props
@@ -21,3 +21,7 @@ class Modal extends Component {
     }
 }
 export default Modal;
+
+Modal.propTypes = {
+    onSubmit: PropTypes.func,
+}

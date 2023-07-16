@@ -28,18 +28,15 @@ export class App extends Component {
     const nextPage = this.state.page;
 
     if (prevQuery !== nextQuery || prevPage !== nextPage) {
-      const currentPage = nextQuery === prevQuery ? nextPage : 1;
-      const prevResults = currentPage === 1 ? [] : prevState.results;
       this.setState({ showLoader: true, error: null });
       try {
-        const data = await api.fetchImages(nextQuery, currentPage);
-        const totalPage = Math.ceil(data.totalHits / data.hits.length)
+        const data = await api.fetchImages(nextQuery, nextPage);
+        const totalPage = Math.ceil(data.totalHits / 12)
         this.setState({
-          results: [...prevResults, ...data.hits],
-          showLoadMore: data.totalHits > 12 * currentPage,
-          page: currentPage
+          results: [...this.state.results, ...data.hits],
+          showLoadMore: data.totalHits > 12 * nextPage
         });
-        !data.totalHits && toast.error("No results found. Please try again!");// : toast.success(`Hooray! We found ${data.totalHits} images`);
+        !data.totalHits && toast.error("No results found. Please try again!");
         nextPage >= totalPage && toast.warning("We're sorry, but you've reached the end of search results!");
       } catch (error) {
         this.setState({ error });
@@ -49,7 +46,7 @@ export class App extends Component {
     }
   }
   onFormSubmit = searchQueryOriginal => {
-    this.setState({ searchQuery: searchQueryOriginal, page: 1 });
+    this.setState({ searchQuery: searchQueryOriginal, page: 1, results: [] });
   }
   onLoadMore = () => {
     if (this.state.results) {

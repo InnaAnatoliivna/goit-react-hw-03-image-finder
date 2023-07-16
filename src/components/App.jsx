@@ -20,7 +20,7 @@ export class App extends Component {
     selectedImage: null,
     galleryRef: React.createRef(),
   }// we got state 'searchQuery' from 'searchbar.js' (searchQueryOriginal=searchQuery)
-
+  // hook
   async componentDidUpdate(prevProps, prevState) {
     const prevQuery = prevState.searchQuery;
     const nextQuery = this.state.searchQuery;

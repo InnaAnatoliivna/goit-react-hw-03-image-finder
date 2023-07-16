@@ -1,12 +1,13 @@
+import React from 'react';
 import { Component } from 'react';
 import { ToastContainer } from 'react-toastify';
 import Searchbar from './searchbar/searchbar';
-import api from 'components/service-api/pixabay-api';
+import api from './service-api/pixabay-api';
 import { toast } from 'react-toastify';
-import ImageGallery from 'components/imageGallery/imageGallery';
-import Button from 'components/button/button';
-import Loader from 'components/loader/loader';
-import Modal from 'components/modal/modal';
+import ImageGallery from './imageGallery/imageGallery';
+import Button from './button/button';
+import Loader from './loader/loader';
+import Modal from './modal/modal';
 export class App extends Component {
   state = {
     searchQuery: '',
@@ -17,6 +18,7 @@ export class App extends Component {
     showLoader: false,
     showModal: false,
     selectedImage: null,
+    galleryRef: React.createRef(),
   }// we got state 'searchQuery' from 'searchbar.js' (searchQueryOriginal=searchQuery)
 
   async componentDidUpdate(prevProps, prevState) {
@@ -37,7 +39,7 @@ export class App extends Component {
           showLoadMore: data.totalHits > 12 * currentPage,
           page: currentPage
         });
-        !data.totalHits ? toast.error("No results found. Please try again!") : toast.success(`Hooray! We found ${data.totalHits} images`);
+        !data.totalHits && toast.error("No results found. Please try again!");// : toast.success(`Hooray! We found ${data.totalHits} images`);
         nextPage >= totalPage && toast.warning("We're sorry, but you've reached the end of search results!");
       } catch (error) {
         this.setState({ error });

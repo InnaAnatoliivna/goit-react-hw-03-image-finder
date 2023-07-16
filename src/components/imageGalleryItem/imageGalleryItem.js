@@ -1,4 +1,6 @@
-const ImageGalleryItem = ({ imageWeb, imageId, onOpenModal, getFilmId }) => {
+import PropTypes from 'prop-types';
+
+const ImageGalleryItem = ({ imageWeb, imageId, onOpenModal }) => {
     const handleClick = () => {
         onOpenModal(imageId)
     };
@@ -14,3 +16,9 @@ const ImageGalleryItem = ({ imageWeb, imageId, onOpenModal, getFilmId }) => {
 };
 
 export default ImageGalleryItem;
+
+ImageGalleryItem.propTypes = {
+    imageWeb: PropTypes.string,
+    onOpenModal: PropTypes.func,
+    imageId: PropTypes.number,
+}

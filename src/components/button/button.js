@@ -1,4 +1,7 @@
+import PropTypes from 'prop-types';
+
 const Button = ({ children, handleClick }) => {
+
     return (
         <div className="btn-wrapper">
             <button
@@ -11,3 +14,7 @@ const Button = ({ children, handleClick }) => {
 }
 
 export default Button;
+
+Button.propTypes = {
+    handleClick: PropTypes.func,
+}

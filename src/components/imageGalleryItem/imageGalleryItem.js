@@ -1,8 +1,7 @@
-const ImageGalleryItem = ({ imageWeb, imageId, onOpenModal }) => {
-    const handleClick = e => {
-        onOpenModal(imageId);
+const ImageGalleryItem = ({ imageWeb, imageId, onOpenModal, getFilmId }) => {
+    const handleClick = () => {
+        onOpenModal(imageId)
     };
-
     return (
         <li key={imageId} onClick={handleClick} className="ImageGalleryItem">
             <img
